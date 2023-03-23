@@ -1,7 +1,7 @@
 # 使い方
-# python3 search_logs.py [検索パス] [検索ワード] [出力ファイル]
-# python3 search_logs.py <directory> <keyword> <output_file>
-# python3 search_logs.py ./sample "local.ERROR" debug_all.log
+# python3 ./py_log_analyzer/search_logs.py [検索パス] [検索ワード] [出力ファイル]
+# python3 ./py_log_analyzer/search_logs.py <directory> <keyword> <output_file>
+# python3 ./py_log_analyzer/search_logs.py ./sample "local.ERROR" debug_all.log
 import os
 import sys
 

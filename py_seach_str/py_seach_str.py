@@ -1,5 +1,5 @@
 # 使い方
-# python3 py_seach_str.py
+# python3 ./py_seach_str/py_seach_str.py
 import subprocess
 import re
 

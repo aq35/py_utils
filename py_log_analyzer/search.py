@@ -1,6 +1,6 @@
 # 使い方
-# python3 search.py [検索ワード] [検索対象のファイル名]
-# python3 search.py "staging.ERROR" debug.log
+# python3 ./py_log_analyzer/search.py [検索ワード] [検索対象のファイル名]
+# python3 ./py_log_analyzer/search.py "staging.ERROR" debug.log
 import re
 import sys
 
