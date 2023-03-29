@@ -1,7 +1,7 @@
 # 使い方
 # python3 ./py_log_analyzer/search_logs.py [検索パス] [検索ワード] [出力ファイル]
 # python3 ./py_log_analyzer/search_logs.py <directory> <keyword> <output_file>
-# python3 ./py_log_analyzer/search_logs.py ./sample "local.ERROR" debug_all.log
+# python3 ./py_log_analyzer/search_logs.py ./py_log_analyzer/sample "local.ERROR" debug_all.log
 import os
 import sys
 
@@ -15,16 +15,25 @@ directory = sys.argv[1]
 keyword = sys.argv[2]
 output_file = sys.argv[3]
 
-# ディレクトリ内のlogファイルを検索する
+# 対応するエンコーディングリストを定義
+encodings = ['utf-8', 'shift-jis', 'euc-jp', 'iso-2022-jp', 'us-ascii']
+
+# ディレクトリ内のlogファイルとtxtファイルを検索する
 matches = []
 for root, dirnames, filenames in os.walk(directory):
     for filename in filenames:
-        if filename.endswith('.log'):
-            # logファイル内のキーワードを検索する
-            with open(os.path.join(root, filename), 'r') as f:
-                for i, line in enumerate(f):
-                    if keyword in line:
-                        matches.append(f"{os.path.join(root, filename)}:{i+1}:{line.strip()}")
+        _, extension = os.path.splitext(filename)
+        if extension == '.log' or extension == '.txt' or not extension:
+            # ファイル内のキーワードを検索する
+            for encoding in encodings:
+                try:
+                    with open(os.path.join(root, filename), encoding=encoding) as f:
+                        for i, line in enumerate(f):
+                            if keyword in line:
+                                matches.append(f"{os.path.join(root, filename)}:{i+1}:{line.strip()}")
+                except UnicodeDecodeError:
+                    print('aa')
+                    pass
 
 # 一致した行をファイルに出力する
 if matches:
